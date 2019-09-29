@@ -1,0 +1,111 @@
+﻿@model IEnumerable<GateBoys.Models.driver>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+    int i = 0;
+}
+
+
+<div class="bs-example widget-shadow" data-example-id="hoverable-table">
+    <br />
+    <h4> All drivers  <span class="fa fa-car"></span></h4>
+    <br />
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Profile
+                </th>
+                <th>
+                    Employees
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeIdNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeeEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employeePhonenumber)
+                </th>
+                <th>
+                    Docs
+                </th>
+                <th>
+                    Adress
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateRegistered)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    <img style="height:100px;width:100px;" class="img img-responsive img-rounded img-thumbnail" src="/Upload/getProfilePicture/@Html.DisplayFor(modelItem=>item.id)?employeeRole=driver" alt="Picture" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeeName)
+                    @Html.DisplayFor(modelItem => item.employeeMidName)
+                    @Html.DisplayFor(modelItem => item.employeeSurname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeeIdNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeeEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeePhonenumber)
+                </td>
+                <td>
+                    <a href="/Upload/getCV/@Html.DisplayFor(modelItem=>item.id)?employeeRole=driver" title="CV">
+                        CV<span class="glyphicon glyphicon-download-alt"></span>
+                    </a><br />
+                    <a href="/Upload/getId/@Html.DisplayFor(modelItem=>item.id)?employeeRole=driver" title="ID">
+                        ID<span class="glyphicon glyphicon-download-alt"></span>
+                    </a><br />
+                    <a href="/Upload/getQualification/@Html.DisplayFor(modelItem=>item.id)?employeeRole=driver" title="Qualification">
+                        Qualification<span class="glyphicon glyphicon-download-alt"></span>
+                    </a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.street_number)   @Html.DisplayFor(modelItem => item.route) <br />
+                    @Html.DisplayFor(modelItem => item.administrative_area_level_1)<br />
+                    @Html.DisplayFor(modelItem => item.locality)<br />
+                    @Html.DisplayFor(modelItem => item.postal_code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateRegistered)
+                </td>
+                <td>
+
+                    <div class="btn-group">
+                        <a href="/drivers/Edit/@item.id" class="btn btn-default" aria-label="Center Align">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                        <a href="/drivers/Details/@item.id" class="btn btn-default" aria-label="Center Align">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                        <a href="/drivers/Delete/@item.id" class="btn btn-default" aria-label="Center Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
